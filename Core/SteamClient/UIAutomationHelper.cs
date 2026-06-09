@@ -129,25 +129,10 @@ namespace SteamAutoLauncher.Core.SteamClient
                     new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.ComboBox)
                 );
 
-                var treeWalker = TreeWalker.ContentViewWalker;
-                var element = treeWalker.GetFirstChild(root);
-                
-                while (element != null)
+                var allInputs = root.FindAll(TreeScope.Descendants, condition);
+                foreach (AutomationElement element in allInputs)
                 {
-                    if (condition.Matches(element))
-                    {
-                        inputs.Add(element);
-                    }
-
-                    var child = treeWalker.GetFirstChild(element);
-                    if (child != null)
-                    {
-                        element = child;
-                    }
-                    else
-                    {
-                        element = treeWalker.GetNextSibling(element);
-                    }
+                    inputs.Add(element);
                 }
             }
             catch
