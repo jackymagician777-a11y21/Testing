@@ -1,6 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 using SteamAutoLauncher.Config;
 using SteamAutoLauncher.Core;
 using SteamAutoLauncher.Core.Logging;
