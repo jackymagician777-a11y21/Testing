@@ -38,7 +38,8 @@ namespace SteamAutoLauncher.Core.SteamClient
                             try
                             {
                                 // Try to set focus and type
-                                if (inputBox.TryGetCurrentPattern(ValuePattern.Pattern) is ValuePattern valuePattern)
+                                if (inputBox.TryGetCurrentPattern(ValuePattern.Pattern, out object? valuePatternObj) && 
+                                    valuePatternObj is ValuePattern valuePattern)
                                 {
                                     inputBox.SetFocus();
                                     await Task.Delay(100);
@@ -87,7 +88,8 @@ namespace SteamAutoLauncher.Core.SteamClient
                         {
                             try
                             {
-                                if (button.TryGetCurrentPattern(InvokePattern.Pattern) is InvokePattern invokePattern)
+                                if (button.TryGetCurrentPattern(InvokePattern.Pattern, out object? invokePatternObj) && 
+                                    invokePatternObj is InvokePattern invokePattern)
                                 {
                                     button.SetFocus();
                                     await Task.Delay(100);
@@ -127,25 +129,24 @@ namespace SteamAutoLauncher.Core.SteamClient
                     new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.ComboBox)
                 );
 
-                using (var treeWalker = TreeWalker.ContentViewWalker)
+                var treeWalker = TreeWalker.ContentViewWalker;
+                var element = treeWalker.GetFirstChild(root);
+                
+                while (element != null)
                 {
-                    var element = treeWalker.GetFirstChild(root);
-                    while (element != null)
+                    if (condition.Matches(element))
                     {
-                        if (condition.Matches(element))
-                        {
-                            inputs.Add(element);
-                        }
+                        inputs.Add(element);
+                    }
 
-                        var child = treeWalker.GetFirstChild(element);
-                        if (child != null)
-                        {
-                            element = child;
-                        }
-                        else
-                        {
-                            element = treeWalker.GetNextSibling(element);
-                        }
+                    var child = treeWalker.GetFirstChild(element);
+                    if (child != null)
+                    {
+                        element = child;
+                    }
+                    else
+                    {
+                        element = treeWalker.GetNextSibling(element);
                     }
                 }
             }
