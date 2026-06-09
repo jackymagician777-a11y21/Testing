@@ -1,0 +1,35 @@
+{
+  "accounts": [
+    {
+      "label": "Account 1",
+      "login": "your_login_1",
+      "password": "your_password_1",
+      "maFilePath": "./mafiles/your_login_1.maFile"
+    },
+    {
+      "label": "Account 2",
+      "login": "your_login_2",
+      "password": "your_password_2",
+      "maFilePath": "./mafiles/your_login_2.maFile"
+    }
+  ],
+  "game": {
+    "appId": 3419430,
+    "gamePath": "C:\\Games\\BongoCat\\BongoCat.exe",
+    "launchMethod": "appid"
+  },
+  "delays": {
+    "waitSteamStartMs": 5000,
+    "waitSteamLoginMs": 15000,
+    "gamePlayTimeMs": 20000,
+    "waitGameStartMs": 3000,
+    "waitGameExitMs": 2000,
+    "waitSteamExitMs": 5000,
+    "betweenAccountsMs": 3000
+  },
+  "settings": {
+    "steamExePath": "C:\\Program Files (x86)\\Steam\\steam.exe",
+    "uIAutomationTimeoutMs": 10000,
+    "maxRetries": 3
+  }
+}
